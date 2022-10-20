@@ -4,10 +4,12 @@
   "description": "",
   "main": "index.js",
   "bin": {
-    "pack": "./.bin/gabspacker"
+    "pack": "./.bin/packer"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node ./.bin/packer",
+    "build": "node ./.bin/packer build"
   },
   "keywords": [
     "babel",
