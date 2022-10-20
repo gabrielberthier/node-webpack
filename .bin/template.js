@@ -6,16 +6,18 @@ const fs = require("fs");
 process.on("SIGINT", process.exit);
 
 /**
+ * @callback CompilerExecutor
+ * @param {webpack.Compiler} data
+ * @returns {void}
+ */
+
+/**
  *
  * @param {string} environment
- * @param {CallableFunction} serverCompilerExecutor
+ * @param {CompilerExecutor} serverCompilerExecutor
  */
 module.exports = (
   environment,
-  /**
-   * @param {string} environment
-   * @param { webpack.Compiler } serverCompiler
-   */
   serverCompilerExecutor = (serverCompiler) => serverCompiler
 ) => {
   const configPath = path.resolve("backpack.config.js");
