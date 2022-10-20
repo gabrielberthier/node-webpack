@@ -11,6 +11,10 @@ module.exports = function () {
           },
           modules: false,
           useBuiltIns: "usage",
+          corejs: {
+            version: "3.8",
+            proposals: true,
+          },
         },
       ],
     ],

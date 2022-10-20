@@ -17,7 +17,7 @@ module.exports = (options) => {
   if (hasBabelRc) {
     console.log("> Using .babelrc defined in your app root");
   } else {
-    mainBabelOptions.presets.push(require.resolve("./babel/preset"));
+    mainBabelOptions.presets.push(require.resolve("./babel-default-preset"));
   }
 
   return {
@@ -67,11 +67,11 @@ module.exports = (options) => {
       ],
     },
     optimization: {
-      noEmitOnErrors: true,
+      emitOnErrors: true,
     },
     plugins: [
       new webpack.DefinePlugin({
-        "process.env.NODE_ENV": JSON.stringify(options.env),
+        // "process.env.NODE_ENV": JSON.stringify(options.env),
         __DEV__: options.env === "development",
       }),
       new webpack.BannerPlugin({
