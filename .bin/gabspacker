@@ -34,19 +34,16 @@ if (commands.has(cmd)) {
   args = process.argv.slice(2);
 }
 
-const processFactory = require("./template");
-processFactory(cmd);
+const bin = path.resolve(path.join(__dirname, cmd));
 
-// const bin = path.resolve(path.join(__dirname, cmd));
+const startProcess = () => {
+  const proc = spawn(bin, args, { stdio: "inherit" });
+  proc.on("close", (code) => process.exit(code));
+  proc.on("error", (err) => {
+    console.error(err);
+    process.exit(1);
+  });
+  return proc;
+};
 
-// const startProcess = () => {
-//   const proc = spawn(bin, args, { stdio: "inherit" });
-//   proc.on("close", (code) => process.exit(code));
-//   proc.on("error", (err) => {
-//     console.error(err);
-//     process.exit(1);
-//   });
-//   return proc;
-// };
-
-// startProcess();
+startProcess();

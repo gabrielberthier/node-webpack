@@ -71,7 +71,7 @@ module.exports = (options) => {
     },
     plugins: [
       new webpack.DefinePlugin({
-        // "process.env.NODE_ENV": JSON.stringify(options.env),
+        "process.env.NODE_ENV": JSON.stringify(options.env),
         __DEV__: options.env === "development",
       }),
       new webpack.BannerPlugin({
