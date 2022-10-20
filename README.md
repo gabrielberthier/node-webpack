@@ -12,8 +12,11 @@ The final result is bundled in CommonJS, as it is **_currently_** more compatibl
 
 ## How to use
 
-The easiest way is by including a script section as below:
-and add a script to your package.json like this:
+Firstly, I strongly recommend yarn for downloading and managing dependencies, since it is what I used while writing this repository.
+
+Simply `yarn install` this.
+
+The easiest way to run the package bundler is by including a script section like below into your package.json:
 
 ```json
 {
