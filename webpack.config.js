@@ -17,7 +17,7 @@ module.exports = (options) => {
   if (hasBabelRc) {
     console.log("> Using .babelrc defined in your app root");
   } else {
-    mainBabelOptions.presets.push(require.resolve("../babel"));
+    mainBabelOptions.presets.push(require.resolve("./babel/preset"));
   }
 
   return {
@@ -27,7 +27,7 @@ module.exports = (options) => {
     externals: [
       nodeExternals({
         modulesFromFile: true,
-        whitelist: [
+        allowlist: [
           /\.(eot|woff|woff2|ttf|otf)$/,
           /\.(svg|png|jpg|jpeg|gif|ico|webm)$/,
           /\.(mp4|mp3|ogg|swf|webp)$/,
@@ -58,7 +58,6 @@ module.exports = (options) => {
     },
     module: {
       rules: [
-        // Process JS with Babel (transpiles ES6 code into ES5 code).
         {
           test: /\.(js|jsx)$/,
           loader: require.resolve("babel-loader"),
@@ -67,23 +66,14 @@ module.exports = (options) => {
         },
       ],
     },
-    // A few commonly used plugins have been removed from Webpack v4.
-    // Now instead, these plugins are avaliable as "optimizations".
-    // @see https://webpack.js.org/configuration/optimization/
     optimization: {
       noEmitOnErrors: true,
     },
     plugins: [
-      // We define some sensible Webpack flags. One for the Node environment,
-      // and one for dev / production. These become global variables. Note if
-      // you use something like eslint or standard in your editor, you will
-      // want to configure __DEV__ as a global variable accordingly.
       new webpack.DefinePlugin({
         "process.env.NODE_ENV": JSON.stringify(options.env),
         __DEV__: options.env === "development",
       }),
-      // In order to provide sourcemaps, we automagically insert this at the
-      // top of each file using the BannerPlugin.
       new webpack.BannerPlugin({
         raw: true,
         entryOnly: false,
@@ -96,8 +86,7 @@ module.exports = (options) => {
               require.resolve("source-map-support/register")
         }');`,
       }),
-      // The FriendlyErrorsWebpackPlugin (when combined with source-maps)
-      // gives Backpack its human-readable error messages.
+
       new FriendlyErrorsWebpackPlugin({
         clearConsole: options.env === "development",
       }),

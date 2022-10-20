@@ -16,7 +16,6 @@ module.exports = function () {
     ],
     plugins: [
       require.resolve("@babel/plugin-proposal-class-properties"),
-      require.resolve("@babel/proposal-class-properties"),
       [
         require.resolve("@babel/plugin-proposal-object-rest-spread"),
         {
