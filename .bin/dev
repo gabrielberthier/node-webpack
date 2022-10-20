@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
 const template = require("./template");
+const path = require("path");
 
-template("development", (serverCompiler) => {
+template("development", (serverCompiler, serverConfig) => {
   const nodemon = require("nodemon");
   const once = require("ramda").once;
 

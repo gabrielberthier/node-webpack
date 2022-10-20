@@ -7,7 +7,8 @@ process.on("SIGINT", process.exit);
 
 /**
  * @callback CompilerExecutor
- * @param {webpack.Compiler} data
+ * @param { webpack.Compiler} serverCompiler
+ * @param { Object } serverConfig
  * @returns {void}
  */
 
@@ -16,10 +17,7 @@ process.on("SIGINT", process.exit);
  * @param {string} environment
  * @param {CompilerExecutor} serverCompilerExecutor
  */
-module.exports = (
-  environment,
-  serverCompilerExecutor = (serverCompiler) => serverCompiler
-) => {
+module.exports = (environment, serverCompilerExecutor) => {
   const configPath = path.resolve("backpack.config.js");
   let userConfig = {};
 
@@ -40,5 +38,5 @@ module.exports = (
 
   const serverCompiler = webpack(serverConfig);
 
-  serverCompilerExecutor(serverCompiler);
+  serverCompilerExecutor(serverCompiler, serverConfig);
 };

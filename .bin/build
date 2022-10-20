@@ -2,10 +2,13 @@
 
 const template = require("./template");
 
-template(process.env.NODE_ENV || "production", (serverCompiler) => {
-  serverCompiler.run((error, stats) => {
-    if (error || stats.hasErrors()) {
-      process.exitCode = 1;
-    }
-  });
-});
+template(
+  process.env.NODE_ENV || "production",
+  (serverCompiler, serverConfig) => {
+    serverCompiler.run((error, stats) => {
+      if (error || stats.hasErrors()) {
+        process.exitCode = 1;
+      }
+    });
+  }
+);
